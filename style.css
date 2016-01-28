@@ -1,0 +1,47 @@
+* {
+    margin-left:0;
+    margin-top:0;
+}
+
+header {
+    border: 1px solid black;
+    text-align: center;
+    margin:0;
+    height: 20vh;
+    width: 98vw;
+}
+
+aside {
+    border: 1px solid black;
+    text-align: center;
+    float: left;
+    height: 80vh;
+    width: 10vw;
+}
+
+main {
+    border: 1px solid black;
+    float: left;
+    position: relative;
+    height: 80vh;
+    width: 80vw;
+}
+
+.card {
+    height: 200px;
+    width: 160px;
+    position: relative;
+}
+
+.card img {
+    width:100%;
+    height:auto;
+}
+
+.card .front, .card .back {
+    position: absolute;
+}
+
+.card .back {
+    opacity: 0.7;
+}
