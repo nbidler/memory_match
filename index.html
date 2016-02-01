@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <!--<script src="http://learning-fuze.github.io/memory_match/v0.1/script.js"></script>-->
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <!--
+    BLOODBORNE THE STUPID BABY PROJECT
+    WOW LOOKIT THEM WEREWELFS, THEY GONNA KILLS YOU
+    UNLESS YOU KILL THEM FIRST
+
+    CONCEPT -
+    Header -
+    have Status and Items at top right
+    health and stamina bars, plus Blood Vials (restore health on use)
+    each time you attempt a match, your stamina bar decreases
+    Stamina refills over time
+
+    enemy portrait in top left
+    enemy health bar over the bottom of the header portion
+    (spanning from edge of player area to enemy portrait but not over them)
+    every time a timer runs down, the enemy will attack player
+    if player stamina above a certain level, they attempt to 'dodge' attack
+
+    Stats - self explanatory - maybe accuracy can be used to influence other things?
+
+    Cards -
+    Card backs don't really matter - can be randomly chosen each time
+    (Runes to be used as card backs - can be random or not)
+    Card faces - weapons
+
+    -->
+</head>
+<body>
+<header class="container-fluid">
+    <div class="col-xs-2 col-xs-offset-1">
+        <h3>GAME MENU</h3>
+        <div id="health"></div>
+        <div id="stamina"></div>
+        <!-- <div id="bloodVial">
+            <img src="images/BloodVial.png"
+        </div> -->
+    </div>
+    <div class="col-xs-2">
+        <img class="col-xs-12" src="images/bloodborne_logo.png">
+    </div>
+    <h5 class="col-xs-2">SETTINGS</h5>
+    <h5 class="col-xs-2">ABOUT</h5>
+</header>
+<main class="container">
+    <aside class="col-xs-2">
+        <h4>STATS</h4>
+        <div class="games-played">
+            <h5 class="label">TIMES PLAYED</h5>
+            <h5 class="value"></h5>
+        </div>
+        <div class="attempts">
+            <h5 class="label">TRIES</h5>
+            <h5 class="value"></h5>
+        </div>
+        <div class="accuracy">
+            <h5 class="label">ACCURACY</h5>
+            <h5 class="value"></h5>
+        </div>
+        <button class="reset">YOU DIED</button>
+    </aside>
+    <section id="game-area" class="col-xs-10">
+        <!-- row 1 -->
+        <div class="row">
+            <div class="card col-xs-2">
+                <div class="front down">
+                    <img src="images/HunterAxe.png">
+                </div>
+                <div class="back">
+                    <img src="images/RuneHunter.jpg">
+                </div>
+            </div>
+            <div class="card col-xs-2">
+                <div class="front down">
+                    <img src="images/HunterAxe.png">
+                </div>
+                <div class="back">
+                    <img src="images/RuneFormless_Oedon.jpg">
+                </div>
+            </div>
+            <div class="card col-xs-2">
+                <div class="front down">
+                    <img src="images/Holy_moonlight_sword.jpg">
+                </div>
+                <div class="back">
+                    <img src="images/RuneBeast.jpg">
+                </div>
+            </div>
+            <div class="card col-xs-2">
+                <div class="front down">
+                    <img src="images/Holy_moonlight_sword.jpg">
+                </div>
+                <div class="back">
+                    <img src="images/RuneAnti-Clockwise_Metamorphosis.png">
+                </div>
+            </div>
+            <!--<div class="card col-xs-2">
+                <div class="front down">
+                    <img src="images/HunterBlunderbuss.png">
+                </div>
+                <div class="back">
+                    <img src="images/RuneArcane_Lake.jpg">
+                </div>
+            </div>
+            <div class="card col-xs-2">
+                <div class="front down">
+                    <img src="images/HunterBlunderbuss.png">
+                </div>
+                <div class="back">
+                    <img src="images/RuneRadiance.jpg">
+                </div>
+            </div>
+        </div>
+        &lt;!&ndash; row 2 &ndash;&gt;
+        <div class="row">
+            <div class="card col-xs-2">
+                <div class="front down">
+                    <img src="images/SawCleaver.png">
+                </div>
+                <div class="back">
+                    <img src="images/RuneEye.png">
+                </div>
+            </div>
+            <div class="card col-xs-2">
+                <div class="front down">
+                    <img src="images/ThreadedCane.png">
+                </div>
+                <div class="back">
+                    <img src="images/RuneBlood_Rapture.jpg">
+                </div>
+            </div>
+            <div class="card col-xs-2">
+                <div class="front down">
+                    <img src="images/Torch.png">
+                </div>
+                <div class="back">
+                    <img src="images/RuneClawmark.jpg">
+                </div>
+            </div>
+            <div class="card col-xs-2">
+                <div class="front down">
+                    <img src="images/Cannon.png">
+                </div>
+                <div class="back">
+                    <img src="images/RuneClockwise_Metamorphosis.jpg">
+                </div>
+            </div>
+            <div class="card col-xs-2">
+                <div class="front down">
+                    <img src="images/Flamesprayer.png">
+                </div>
+                <div class="back">
+                    <img src="images/RuneCommunion.jpg">
+                </div>
+            </div>
+            <div class="card col-xs-2">
+                <div class="front down">
+                    <img src="images/Kirkhammer.png">
+                </div>
+                <div class="back">
+                    <img src="images/RuneCorruption.jpg">
+                </div>
+            </div>
+        </div>
+        &lt;!&ndash; row 3 &ndash;&gt;
+        <div class="row">
+            <div class="card col-xs-2">
+                <div class="front down">
+                    <img src="images/SawCleaver.png">
+                </div>
+                <div class="back">
+                    <img src="images/RuneMilkweed.jpg">
+                </div>
+            </div>
+            <div class="card col-xs-2">
+                <div class="front down">
+                    <img src="images/ThreadedCane.png">
+                </div>
+                <div class="back">
+                    <img src="images/RuneGreat_Deep_Sea.jpg">
+                </div>
+            </div>
+            <div class="card col-xs-2">
+                <div class="front down">
+                    <img src="images/Torch.png">
+                </div>
+                <div class="back">
+                    <img src="images/RuneHeir.jpg">
+                </div>
+            </div>
+            <div class="card col-xs-2">
+                <div class="front down">
+                    <img src="images/Cannon.png">
+                </div>
+                <div class="back">
+                    <img src="images/RuneMoon.jpg">
+                </div>
+            </div>
+            <div class="card col-xs-2">
+                <div class="front down">
+                    <img src="images/Flamesprayer.png">
+                </div>
+                <div class="back">
+                    <img src="images/RuneOedon_Writhe.jpg">
+                </div>
+            </div>
+            <div class="card col-xs-2">
+                <div class="front down">
+                    <img src="images/Kirkhammer.png">
+                </div>
+                <div class="back">
+                    <img src="images/RuneHunter.jpg">
+                </div>
+            </div>
+        </div>-->
+    </section>
+</main>
+<div class="win_message dismissed">
+    <p>PREY SLAUGHTERED</p>
+</div>
+</body>
+</html>
