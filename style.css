@@ -1,0 +1,181 @@
+/* ALL */
+
+* {
+    margin: 0 0 auto 0;
+    position: relative;
+    box-sizing: border-box;
+    color: slategrey;
+    font-family: "Times New Roman";
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    background-color: #101818;
+    background-image: url("images/bg.jpg");
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: contain;
+}
+
+/* HEADER */
+
+header {
+    /*border: 1px solid black;*/
+    text-align: center;
+    margin:0;
+    height: 20%;
+    width: 100%;
+}
+
+header div {
+    height: 100%;
+}
+
+header div img{
+    margin-top: -8%;
+}
+
+/*
+header #health{
+    background-color: red;
+    height: 5px;
+    width: 80px;
+}
+
+header #stamina{
+    background-color: forestgreen;
+    height: 5px;
+    width: 40px;
+}
+
+header #bloodVial img{
+    height: 20%;
+    width: 20%;
+}*/
+
+/* BODY */
+
+main {
+    height: 80%;
+}
+
+/* SIDE MENU */
+
+aside {
+    /*border: 1px solid black;*/
+    text-align: center;
+    float: left;
+    height: 100%;
+}
+
+aside .label {
+    color: slategray;
+    font-size: 100%;
+}
+
+aside .reset {
+    color: red;
+    text-shadow: 0px 0px 10px red;
+    background-color: black;
+    border: 2px outset red;
+}
+
+/* PLAY AREA */
+
+section {
+    /*border: 1px solid black;*/
+    float: left;
+    height: 100%;
+}
+
+section .row {
+    height: 33%;
+}
+
+/* CARDS */
+section .card {
+    position: relative;
+    display: inline-block;
+    opacity: 1;
+    height: 33%;
+}
+
+section .card img {
+    width:100%;
+    height:auto;
+}
+
+section .card .front, .card .back {
+    position: absolute;
+    transition-duration: 1s;
+}
+/*
+@keyframes back-fade {
+    from {opacity:1;}
+    to {opacity:0;}
+}
+
+/*
+section .card .back:hover {
+    animation-name: back-fade;
+    animation-duration: 1s;
+    opacity: 0;
+}*/
+
+.down {
+    transition-duration: 0.5s;
+    transform:rotateZ(360deg);
+    opacity:0;
+}
+
+/* class to target specific element for comparison */
+.selected {}
+
+/* class to lock 'card' in place while showing result */
+.lock{}
+
+/* class to lock 'card' in place after solved */
+.matched{}
+
+/*
+18 cards, 9 matches
+
+            */
+/* Fade in on win, take up whole screen */
+.win_message {
+    /*big obvious overlay*/
+    background-color: black;
+    transition-duration: 1s;
+    opacity:0.8;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: +1;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.win_message p {
+    transform:translateY(10%);
+    margin-top: 10%;
+    font-size: 90px;
+}
+/*colors for PREY SLAUGHTERED*/
+.win_msg1 {
+    color: #A9FCC4;
+    text-shadow: 0px 0px 50px #A9FCC4;
+}
+/*colors for NIGHTMARE SLAIN*/
+.win_msg2 {
+    color: #692616;
+    text-shadow: 0px 0px 50px #692616;
+}
+
+/*win_message fade in/out */
+.dismissed {
+    z-index: -1;
+    opacity:0;
+}
