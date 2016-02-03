@@ -81,8 +81,11 @@ function card_clicked(target){
         //if second, check if card matches first
         if (first_card_clicked  == second_card_clicked)
         {
-            //card matches
-            match_counter +=1;
+            //card matches AND is not same card
+            if ($('.selected').length > 1)
+            {
+                match_counter +=1;
+            }
             //if last match, game won!
             if(match_counter == total_possible_matches)
             {
