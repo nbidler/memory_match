@@ -124,7 +124,7 @@ function card_clicked(target){
     //console.log(temp);
 }
 
-
+//dan start
 //'reverses' card face
 function cardFlip(toFlip){
     $(toFlip).find('.back').toggleClass('down');
@@ -145,7 +145,7 @@ function display_stats() {
     $('.attempts .value').html(attempts);
     $('.accuracy .value').html(accuracy + '%');
 }
-
+//dan end
 function reset_stats() {
     match_counter = 0; // is 'matches' in instructions
     attempts = 0;
