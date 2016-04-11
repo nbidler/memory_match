@@ -127,23 +127,25 @@ function card_clicked(target){
 //dan start
 //'reverses' card face
 //toFlip is the container 'card' to be flipped
-    //the container has two subsections of 'front' and 'back'
-    //  having the class 'down' means the subsection is transparent
-    //  it is set up such that when one is 'down,' the other is not
+function cardFlip(toFlip){
+    $(toFlip).find('.back').toggleClass('down');
+    $(toFlip).find('.front').toggleClass('down');
+}
 
-//triggered when two cards are selected but do not match
-    //turns the selected cards (which are face-up) back to face-down
+function noMatch(){
+    cardFlip('.selected');
     //un-select cards, reset for next attempt
-    //removes the selected class so that no cards are currently being checked for
-    //removes 'lock' on cards so they will react to being clicked again
-    //  note: 'lock' separate from 'matched' even though function is same
-    //resets values to be compared when card is clicked
+    $('.selected').removeClass('selected');
+    $('.card').removeClass('lock');
+    first_card_clicked  = null;
+    second_card_clicked  = null;
+}
 
-//updates the display on the sidebar to display stats (calculated elsewhere)
-    //gives games-played an updated value
-    //gives attempts an updated value
-    //gives accuracy an updated value (plus percent sign)
-
+function display_stats() {
+    $('.games-played .value').html(games_played);
+    $('.attempts .value').html(attempts);
+    $('.accuracy .value').html(accuracy + '%');
+}
 //dan end
 function reset_stats() {
     match_counter = 0; // is 'matches' in instructions
