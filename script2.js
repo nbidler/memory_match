@@ -176,14 +176,15 @@ function gameArea() {
 
         //change card appearance to match randomized backs and faces
         for (var k = 0; k < 18; k++){
-            console.log("images/" + self.deck[k].back);
+            //console.log('back', "images/" + self.deck[k].back);
+            //console.log('front', "images/" + self.currentFaces[self.deck[k].pair]);
+
+            var current = $("[data-position = '" + self.deck[k].position + "']");
             //set face
-            $("[data-position = '" + self.deck[k].position + "']")
-                .find('.front').find('img')
+            current.find('.front').find('img')
                 .attr('src', "images/" + self.currentFaces[self.deck[k].pair]);
             //set back
-            $("[data-position = '" + self.deck[k].position + "]")
-                .find('.back').find('img')
+            current.find('.back').find('img')
                 .attr('src', "images/" + self.deck[k].back +"");
         }
 
