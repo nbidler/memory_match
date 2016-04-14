@@ -4,8 +4,8 @@
 
 function gameArea() {
     var self = this;
-    this.first_card_clicked  = null;
-    this.second_card_clicked  = null;
+    this.first_card_clicked = null;
+    this.second_card_clicked = null;
     this.total_possible_matches  = 9;
     this.match_counter = 0; // is 'matches' in instructions
     this.attempts = 0;
@@ -114,7 +114,7 @@ function gameArea() {
         //deal 'new cards'
 
         //create array of card positions, numbered 1-18
-        var positions = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18];
+        var positions = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17];
         //randomize positions (to be later assigned to cards) with Fisher Yates shuffle
         //  FISHER YATES SHUFFLE
         //  THIS MAY BE USABLE ELSEWHERE BUT UNTIL SUCH POINT IT'S JUST IN THIS FUNCTION
@@ -152,26 +152,40 @@ function gameArea() {
         //having shuffled card faces, assign them to pairs
         self.currentFaces = [];
         for (var j = 0; j < 9; j++) {
+            console.log(j, self.faces[j]);
             self.currentFaces.push(self.faces[j]);
         }
+        //console.log(self.currentFaces);
 
         //create empty deck, populate deck of 18 cards
         self.deck = [];
 
-        for (var i = 1; i < 19; i++){
+        for (var i = 0; i < 18; i++){
             //  make a card object to put values into
             var card = new self.gameCard();
             //  assign cards positions from the randomized list
-            card.position = positions[i - 1];
+            card.position = positions[i];
             //  assign cards their pair (and by extension, faces)
-            card.pair = (i % 9) + 1;
+            card.pair = (i % 9);
             //give card a random back, for flavor
             card.back = self.backs[Math.floor(Math.random() * 17)];
             //  put card into deck
             self.deck.push(card);
         }
-        //console.log(deck);
+        //console.log(self.deck);
 
+        //change card appearance to match randomized backs and faces
+        for (var k = 0; k < 18; k++){
+            console.log("images/" + self.deck[k].back);
+            //set face
+            $("[data-position = '" + self.deck[k].position + "']")
+                .find('.front').find('img')
+                .attr('src', "images/" + self.currentFaces[self.deck[k].pair]);
+            //set back
+            $("[data-position = '" + self.deck[k].position + "]")
+                .find('.back').find('img')
+                .attr('src', "images/" + self.deck[k].back +"");
+        }
 
     };
 
@@ -218,14 +232,30 @@ function gameArea() {
         if (self.first_card_clicked  == null)
         {
             //store first card
-            self.first_card_clicked  = $(target).find('.front').find('img').attr('src');
+            for (var k = 0; k < 18; k++)
+            {
+                if (self.deck[k].position == $(target).attr('data-position'))
+                {
+                    self.first_card_clicked  = self.deck[k].pair;
+                    break;
+                }
+            }
+
         }
         //if not first of pair, is second
         else
         {
             //store second card
-            self.second_card_clicked  = $(target).find('.front').find('img').attr('src');
+            for (var k = 0; k < 18; k++)
+            {
+                if (self.deck[k].position == $(target).attr('data-position'))
+                {
+                    self.second_card_clicked  = self.deck[k].pair;
+                    break;
+                }
+            }
 
+            console.log(self.first_card_clicked, self.second_card_clicked);
             //attempt to match is made
             self.attempts++;
             //if second, check if card matches first
@@ -240,7 +270,7 @@ function gameArea() {
                 if(self.match_counter == self.total_possible_matches)
                 {
                     //different messages!
-                    if (self.accuracy < 80)
+                    if (self.accuracy < 50)
                     {
                         $('.win_message').find('p').html('PREY SLAUGHTERED');
                         $('.win_message').find('p').addClass('win_msg1');
@@ -279,6 +309,9 @@ function gameArea() {
 $(document).ready(function(){
 
     var game = new gameArea();
+    game.resetGame();
+    console.log(game.deck);
+
     //reset game
     $('button').click(function(){
         game.resetGame();
