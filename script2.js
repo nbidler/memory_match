@@ -2,7 +2,7 @@
  * Created by Nick on 4/11/2016.
  */
 
-function gameArea() {
+function GameArea() {
     var self = this;
     this.first_card_clicked = null;
     this.second_card_clicked = null;
@@ -270,16 +270,17 @@ function gameArea() {
                 //if last match, game won!
                 if(self.match_counter == self.total_possible_matches)
                 {
+                    var winMsg = $('.win_message').find('p');
                     //different messages!
                     if (self.accuracy < 50)
                     {
-                        $('.win_message').find('p').html('PREY SLAUGHTERED');
-                        $('.win_message').find('p').addClass('win_msg1');
+                        winMsg.html('PREY SLAUGHTERED');
+                        winMsg.addClass('win_msg1');
                     }
                     else
                     {
-                        $('.win_message').find('p').html('NIGHTMARE SLAIN');
-                        $('.win_message').find('p').addClass('win_msg2');
+                        winMsg.html('NIGHTMARE SLAIN');
+                        winMsg.addClass('win_msg2');
                     }
                     $('.win_message').removeClass('dismissed')
                 }
@@ -309,7 +310,7 @@ function gameArea() {
 
 $(document).ready(function(){
 
-    var game = new gameArea();
+    var game = new GameArea();
     game.resetGame();
     console.log(game.deck);
 
