@@ -17,6 +17,7 @@ function GameArea() {
 
     //create array of possible card backs/faces
     //use random to choose an image and set img src as "images/" + text, i.e. "images/RuneHunter.jpg"
+    //backs and faces are both arrays of strings of just the filenames, i/e. 'RuneBeast.jpg'
 
     // backs.length is 17
     this.backs = ["RuneAnti-Clockwise_Metamorphosis.png",
